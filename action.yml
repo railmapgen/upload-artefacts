@@ -1,0 +1,30 @@
+name: 'Upload Artefacts Action'
+description: 'Upload built artefacts of railmapgen projects to uat-railmapgen/rmg-repositories'
+inputs:
+  app_name:
+    required: true
+  version:
+    required: true
+  dist:
+    required: true
+  token:
+    required: true
+    default: ${{ github.token }}
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout rmg-repositories
+      uses: actions/checkout@v3
+      with:
+        repository: uat-railmapgen/rmg-repositories
+        path: repo
+        token: ${{ inputs.token }}
+
+    - name: Upload
+      run: |
+        chmod +x ./upload.sh
+        ./upload.sh
+      env:
+        APP_NAME: ${{ inputs.app_name }}
+        VERSION: ${{ inputs.version }}
+        DIST: ${{ inputs.dist }}
