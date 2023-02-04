@@ -21,7 +21,7 @@ runs:
         token: ${{ inputs.token }}
 
     - name: Upload
-      run: upload.sh
+      run: ${{ github.action_path }}/upload.sh
       shell: bash
       env:
         APP_NAME: ${{ inputs.app_name }}
