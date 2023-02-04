@@ -24,6 +24,7 @@ runs:
       run: |
         chmod +x ./upload.sh
         ./upload.sh
+      shell: bash
       env:
         APP_NAME: ${{ inputs.app_name }}
         VERSION: ${{ inputs.version }}
