@@ -21,9 +21,7 @@ runs:
         token: ${{ inputs.token }}
 
     - name: Upload
-      run: |
-        chmod +x ./upload.sh
-        ./upload.sh
+      run: upload.sh
       shell: bash
       env:
         APP_NAME: ${{ inputs.app_name }}
