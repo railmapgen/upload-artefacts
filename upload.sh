@@ -8,6 +8,7 @@ git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 mkdir -p ./repo/"$APP_NAME"/
 cp -r ./"$DIST"/ ./repo/"$APP_NAME"/"$VERSION"/
 
+cd ./repo/
 git add .
 git commit -m "Build version $APP_NAME-$VERSION"
 {
