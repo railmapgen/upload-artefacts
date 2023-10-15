@@ -13,6 +13,13 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - name: Checkout rmg-repositories
+      uses: actions/checkout@v3
+      with:
+        repository: uat-railmapgen/rmg-repositories
+        path: repo
+        token: ${{ inputs.token }}
+
     - name: Upload
       run: ${{ github.action_path }}/upload.sh
       shell: bash
@@ -20,4 +27,3 @@ runs:
         APP_NAME: ${{ inputs.app_name }}
         VERSION: ${{ inputs.version }}
         DIST: ${{ inputs.dist }}
-        TOKEN: ${{ inputs.token }}

@@ -1,19 +1,20 @@
 #!/bin/bash
 set -eux
 
+# git config
+git config --global user.name 'github-actions[bot]'
+git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+mkdir -p ./repo/"$APP_NAME"/
 tar -czvf "$VERSION".tar.gz --directory "$DIST" .
+cp "$VERSION".tar.gz ./repo/"$APP_NAME"/
 
-MESSAGE="Build version $APP_NAME-$VERSION"
-cat >payload.json <<EOF
+cd ./repo/
+git add .
+git commit -m "Build version $APP_NAME-$VERSION"
 {
-  "message": "$MESSAGE",
-  "committer": {
-    "name": "github-actions[bot]",
-    "email": "github-actions[bot]@users.noreply.github.com"
-  },
-  "content": "$(base64 -i $VERSION.tar.gz)"
+  git push
+} || {
+  git pull --rebase
+  git push
 }
-EOF
-
-echo $TOKEN | gh auth login --with-token
-cat payload.json | gh api -X PUT /repos/uat-railmapgen/rmg-repositories/contents/$APP_NAME/$VERSION.tar.gz --input -
