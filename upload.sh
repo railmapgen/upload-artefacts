@@ -6,7 +6,7 @@ git config --global user.name 'github-actions[bot]'
 git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
 mkdir -p ./repo/"$APP_NAME"/
-tar -czvf "$VERSION".tar.gz --directory "$VERSION" .
+tar -czvf "$VERSION".tar.gz --directory "$DIST" .
 cp "$VERSION".tar.gz ./repo/"$APP_NAME"/
 
 cd ./repo/
