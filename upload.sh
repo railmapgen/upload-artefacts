@@ -15,5 +15,7 @@ cat >payload.json <<EOF
 }
 EOF
 
+cat payload.json
+
 echo $TOKEN | gh auth login --with-token
 cat payload.json | gh api -X PUT /repos/uat-railmapgen/rmg-repositories/contents/$APP_NAME/$VERSION.tar.gz --input -
