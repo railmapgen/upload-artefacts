@@ -6,7 +6,8 @@ git config --global user.name 'github-actions[bot]'
 git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
 mkdir -p ./repo/"$APP_NAME"/
-cp -r ./"$DIST"/ ./repo/"$APP_NAME"/"$VERSION"/
+tar -czvf "$VERSION".tar.gz --directory "$VERSION" .
+cp "$VERSION".tar.gz ./repo/"$APP_NAME"/
 
 cd ./repo/
 git add .
